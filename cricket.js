@@ -269,7 +269,7 @@ function stopTimer() {
               const container = document.getElementById('innerdiv');
             container.innerHTML = '<h2 style="    color: black;margin-left: 139px;">   Quiz Completed</h2>';
             document.getElementById('next-button').style.display = 'none' ;
-            document.getElementById('prev-button').style.marginLeft = "-63px" ;
+            document.getElementById('prev-button').style.marginLeft = "-49px" ;
             document.getElementById('timer').style.display="none";
 
             

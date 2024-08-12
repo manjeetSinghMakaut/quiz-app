@@ -14,7 +14,12 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background-color: rgb(160, 182, 255);
+      background-color: #34495e; 
+
+
+
+
+
       
     }
     .maindiv {
@@ -26,29 +31,29 @@
       flex-direction: column;
     }
     .prev {
-      height: 30px;
-      width: 90px;
-      border: none;
-      border-radius: 12px;
-      color: white;
-      background-color: rgb(209, 19, 19);
-      font-size: 16px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: 400;
+      height: 36px;
+    width: 90px;
+    border: none;
+    border-radius: 9px;
+    color: white;
+    background-color: rgb(209 28 28);
+    font-size: 17px;
+    font-family: emoji;
+    font-weight: 600;
     }
     .next {
-      height: 30px;
-      width: 90px;
-      border: none;
-      border-radius: 12px;
-      color: white;
-      background-color: rgb(23, 218, 55);
-      font-size: 16px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: 400;
+      height: 36px;
+    width: 90px;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        background-color: rgb(30 173 54);
+        font-size: 17px;
+        font-family: emoji;
+        font-weight: 600;
     }
     .innerdiv {
-      height: 309px;
+      height: 303px;
     width: 501px;
     margin-top: 129px;
     background-color: white;
@@ -57,19 +62,20 @@
     border-radius: 22px;
     }
     .button-div {
-        margin-top: 60px;
+      margin-top: 1px;
     display: flex;
-    gap: 234px;
+    gap: 294px;
 }
     .questionelement {
-      font-size: 17px;
+    font-size: 17px;
     font-family: emoji;
-    margin-bottom: 20px;
-    margin-top: 40px;
+    margin-bottom: 37px;
+    margin-top: 21px;
     height: 47px;
-    background-color: gainsboro;
+    background-color: #ecf0f1; /* Light grey */
+    color: #2c3e50; /* Darker text for contrast */
     border-radius: 12px;
-    padding-top: 34px;
+    padding-top: 16px;
     
 
     }
@@ -78,30 +84,33 @@
     font-weight: 400;
     margin-top: 10px;
     margin-bottom: 8px;
-    background-color: gainsboro;
+    background-color: #bdc3c7; /* Soft blue-grey */
+color: #2c3e50; /* Darker text for contrast */
+
     height: 30px;
     border-radius: 8px;
     padding-top: 1px;
 }
 #timer {
-    font-size: 24px;  /* Adjust the font size */
+  font-size: 24px;
     font-weight: bold;
-    color: #333;  /* Set the text color */
-    text-align: center;  /* Center the text */
-    margin-top: 20px;  /* Add some margin to separate from other elements */
-    height: 21px;
+    text-align: center;
+    margin-top: 20px;
     width: 50px;
+    background-color: #e74c3c;
+    color: #ffffff;
+    height: 29px;
 }
     
   </style>
 </head>
 <body>
   <div class="innerdiv" id="innerdiv"></div>
-  <div id="timer" class="timer"></div>
   <div class="button-div">
     <button class="prev" id="prev-button">prev</button>
     <button class="next" id="next-button">next</button>
   </div>
+  <div id="timer" class="timer"></div>
   <script src="football.js">
     
   </script>

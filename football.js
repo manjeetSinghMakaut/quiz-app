@@ -225,14 +225,31 @@ const quizfootball = [
    
   
     function resetTimer() {
-      clearInterval(intervalId); // Stop the previous timer
-      timeLeft = 30; // Reset the time
-      document.getElementById("timer").textContent = timeLeft; // Update the timer display
+      clearInterval(intervalId);
+      timeLeft = 30; 
+      document.getElementById("timer").textContent = timeLeft; 
   }
     
   function stopTimer() {
-    clearInterval(intervalId); // Stop the timer when the quiz is submitted
+    clearInterval(intervalId); 
   }
+ 
+
+
+  function calculatescore() {
+    let score = 0;
+    quizfootball.forEach((question, index) => {
+      if (selectedoptions[index] === question.correctAnswer) {
+        score++;
+      }
+    });
+  
+    return score;
+  
+  }
+
+
+
 
     window.onload = function() {
       generatequiz(quizfootball, currentQuestionIndex);
@@ -252,10 +269,11 @@ const quizfootball = [
           generatequiz(quizfootball, currentQuestionIndex);
         } else if (currentQuestionIndex === quizfootball.length - 1) {
           stopTimer();
+          const score = calculatescore();
             const container = document.getElementById('innerdiv');
-          container.innerHTML = '<h2 style="    color: black;margin-left: 139px;">   Quiz Completed</h2>';
+            container.innerHTML = `<h2 style="color: black;align-items: center;display: flex;justify-content: center;">Quiz Completed</h2>
+            <p style="text-align: center; color: black;">Your Score: ${score} / ${quizfootball.length}</p>`;
           document.getElementById('next-button').style.display = 'none' ;
-          document.getElementById('prev-button').style.marginLeft = "-49px" ;
           document.getElementById('timer').style.display="none";
         }
       });

@@ -126,7 +126,7 @@ function generatequiz(quizQuestions, index) {
   container.innerHTML = "";
 
   const questionelement = document.createElement("h2");
-  questionelement.textContent = `${index + 1}.${quizQuestions[index].question}`;
+  questionelement.textContent = `${index + 1}. ${quizQuestions[index].question}`;
   questionelement.className = "questionelement";
   container.appendChild(questionelement);
 
@@ -144,7 +144,7 @@ function generatequiz(quizQuestions, index) {
     labelinput.setAttribute("for", `question${index}_${option}`);
 
     if (selectedoptions[index] === option) {
-      optionInput.checked = "true";
+      optionInput.checked = true;
     }
 
     optionelement.appendChild(optionInput);
@@ -173,6 +173,7 @@ function saveanswer() {
     }
   });
 }
+
 const timerElement = document.getElementById("timer");
 
 function timer() {
@@ -182,18 +183,23 @@ function timer() {
 
     if (timeLeft <= 0) {
       clearInterval(intervalId);
+      if (currentQuestionIndex === quizQuestions.length - 1) { // **Change: Check if it's the last question**
+        endQuiz();
+      } else {
+        nextQuestion();
+      }
     }
   }, 1000);
 }
 
 function resetTimer() {
-  clearInterval(intervalId); 
-  timeLeft = 30; 
-  document.getElementById("timer").textContent = timeLeft; 
+  clearInterval(intervalId);
+  timeLeft = 30;
+  document.getElementById("timer").textContent = timeLeft;
 }
 
 function stopTimer() {
-  clearInterval(intervalId); 
+  clearInterval(intervalId);
 }
 
 function calculatescore() {
@@ -203,9 +209,70 @@ function calculatescore() {
       score++;
     }
   });
-
   return score;
+}
 
+function nextQuestion() {
+  saveanswer();
+  if (currentQuestionIndex < quizQuestions.length - 1) {
+    currentQuestionIndex++;
+    generatequiz(quizQuestions, currentQuestionIndex);
+    resetTimer();
+    timer();
+  } else {
+    endQuiz(); // **Change: Automatically call endQuiz() if it's the last question**
+  }
+}
+
+function endQuiz() {
+  stopTimer();
+  let score = calculatescore();
+  const container = document.getElementById("innerdiv");
+  container.innerHTML = `<h2 style="color: black; align-items: center; display: flex; justify-content: center;">Quiz Completed</h2>
+                           <p style="text-align: center; color: #216008; font-size: larger; font-weight: 600;">Your Score: ${score} / ${quizQuestions.length}</p>`;
+
+  // Initialize Pie Chart
+  const ctx = document.getElementById('resultPieChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Correct', 'Incorrect'],
+      datasets: [{
+        data: [score, quizQuestions.length - score],
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.2)', // Color for correct answers
+          'rgba(255, 99, 132, 0.2)'  // Color for incorrect answers
+        ],
+        borderColor: [
+          'rgba(75, 192, 192, 1)',   // Border color for correct answers
+          'rgba(255, 99, 132, 1)'    // Border color for incorrect answers
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        tooltip: {
+          callbacks: {
+            label: function(tooltipItem) {
+              let label = tooltipItem.label || '';
+              if (label) {
+                label += ': ' + tooltipItem.raw;
+              }
+              return label;
+            }
+          }
+        }
+      }
+    }
+  });
+
+  document.getElementById("next-button").style.display = "none";
+  document.getElementById("timer").style.display = "none";
 }
 
 window.onload = function () {
@@ -225,16 +292,11 @@ window.onload = function () {
 
     if (currentQuestionIndex < quizQuestions.length - 1) {
       currentQuestionIndex++;
-
       generatequiz(quizQuestions, currentQuestionIndex);
-    } else if (currentQuestionIndex === quizQuestions.length - 1) {
-      stopTimer();
-      let score = calculatescore();
-      const container = document.getElementById("innerdiv");
-      container.innerHTML = `<h2 style="color: black;align-items: center;display: flex;justify-content: center;">Quiz Completed</h2>
-                                   <p style="text-align: center; color: black;">Your Score: ${score} / ${quizQuestions.length}</p>`;
-      document.getElementById("next-button").style.display = "none";
-      document.getElementById("timer").style.display = "none";
+      resetTimer();
+      timer();
+    } else {
+      endQuiz(); // **Change: Automatically call endQuiz() when "submit" is clicked on the last question**
     }
   });
 };

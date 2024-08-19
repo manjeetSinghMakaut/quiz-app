@@ -38,13 +38,14 @@
         font-weight: 600;
       }
       .innerdiv {
-        height: 303px;
-        width: 501px;
-        margin-top: 129px;
-        background-color: white;
-        padding-left: 20px;
-        padding-right: 20px;
-        border-radius: 22px;
+        height: auto; /* Adjust height automatically */
+  width: 501px; /* Keep the width */
+  margin-top: 129px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 22px;
+  position: relative;
+  
       }
 
       .button-div {
@@ -70,8 +71,8 @@
         font-weight: 400;
         margin-top: 10px;
         margin-bottom: 8px;
-        background-color: #dbe9f3; /* Soft blue-grey */
-color: #2c3e50; /* Darker text for contrast */
+        background-color: #dbe9f3;
+color: #2c3e50; 
 
         height: 30px;
         border-radius: 8px;
@@ -95,18 +96,41 @@ color: #ffffff;
 
 
       }
+
+
+    #resultPieChart{
+    
+      display: block;
+  margin: 20px auto; 
+  width: 100%;
+  max-width: 300px;
+  height: auto; 
+  box-sizing: border-box;
+  display: none;
+    }  
+
+    .innerdiv canvas {
+  max-width: 100%;
+  height: auto;
+}
     </style>
   </head>
 
   <body>
     <div class="innerdiv" id="innerdiv"></div>
+    <canvas id="resultPieChart" class="resultPieChart" ></canvas>
     <div id="timer" class="timer">Timer</div>
+    
 
     <div class="button-div">
       <button class="prev" id="prev-button">prev</button>
       <button class="next" id="next-button">next</button>
     </div>
+   
+
 
     <script src="cricket.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   </body>
 </html>

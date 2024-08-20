@@ -126,7 +126,9 @@ function generatequiz(quizQuestions, index) {
   container.innerHTML = "";
 
   const questionelement = document.createElement("h2");
-  questionelement.textContent = `${index + 1}. ${quizQuestions[index].question}`;
+  questionelement.textContent = `${index + 1}. ${
+    quizQuestions[index].question
+  }`;
   questionelement.className = "questionelement";
   container.appendChild(questionelement);
 
@@ -183,14 +185,15 @@ function timer() {
 
     if (timeLeft <= 0) {
       clearInterval(intervalId);
-      if (currentQuestionIndex === quizQuestions.length - 1) { // **Change: Check if it's the last question**
-        endQuiz();
+      if (currentQuestionIndex === quizQuestions.length - 1) {
+        endQuiz(); // Last question, end the quiz
       } else {
-        nextQuestion();
+        nextQuestion(); // Move to the next question
       }
     }
   }, 1000);
 }
+
 
 function resetTimer() {
   clearInterval(intervalId);
@@ -220,9 +223,10 @@ function nextQuestion() {
     resetTimer();
     timer();
   } else {
-    endQuiz(); // **Change: Automatically call endQuiz() if it's the last question**
+    endQuiz(); // Automatically call endQuiz() if it's the last question
   }
 }
+
 
 function endQuiz() {
   stopTimer();
@@ -232,43 +236,45 @@ function endQuiz() {
                            <p style="text-align: center; color: #216008; font-size: larger; font-weight: 600;">Your Score: ${score} / ${quizQuestions.length}</p>`;
 
   // Initialize Pie Chart
-  const ctx = document.getElementById('resultPieChart').getContext('2d');
+  const ctx = document.getElementById("resultPieChart").getContext("2d");
   new Chart(ctx, {
-    type: 'pie',
+    type: "pie",
     data: {
-      labels: ['Correct', 'Incorrect'],
-      datasets: [{
-        data: [score, quizQuestions.length - score],
-        backgroundColor: [
-          'rgba(75, 192, 192, 0.2)', // Color for correct answers
-          'rgba(255, 99, 132, 0.2)'  // Color for incorrect answers
-        ],
-        borderColor: [
-          'rgba(75, 192, 192, 1)',   // Border color for correct answers
-          'rgba(255, 99, 132, 1)'    // Border color for incorrect answers
-        ],
-        borderWidth: 1
-      }]
+      labels: ["Correct", "Incorrect"],
+      datasets: [
+        {
+          data: [score, quizQuestions.length - score],
+          backgroundColor: [
+            "rgba(75, 192, 192, 0.2)", // Color for correct answers
+            "rgba(255, 99, 132, 0.2)", // Color for incorrect answers
+          ],
+          borderColor: [
+            "rgba(75, 192, 192, 1)", // Border color for correct answers
+            "rgba(255, 99, 132, 1)", // Border color for incorrect answers
+          ],
+          borderWidth: 1,
+        },
+      ],
     },
     options: {
       responsive: true,
       plugins: {
         legend: {
-          position: 'top',
+          position: "top",
         },
         tooltip: {
           callbacks: {
-            label: function(tooltipItem) {
-              let label = tooltipItem.label || '';
+            label: function (tooltipItem) {
+              let label = tooltipItem.label || "";
               if (label) {
-                label += ': ' + tooltipItem.raw;
+                label += ": " + tooltipItem.raw;
               }
               return label;
-            }
-          }
-        }
-      }
-    }
+            },
+          },
+        },
+      },
+    },
   });
 
   document.getElementById("next-button").style.display = "none";
@@ -296,7 +302,7 @@ window.onload = function () {
       resetTimer();
       timer();
     } else {
-      endQuiz(); // **Change: Automatically call endQuiz() when "submit" is clicked on the last question**
+      endQuiz();
     }
   });
 };

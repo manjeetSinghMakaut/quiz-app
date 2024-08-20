@@ -17,18 +17,18 @@
 
       .prev {
         height: 36px;
-    width: 90px;
-    border: none;
-    border-radius: 9px;
-    color: white;
-    background-color: rgb(209 28 28);
-    font-size: 17px;
-    font-family: emoji;
-    font-weight: 600;
+        width: 90px;
+        border: none;
+        border-radius: 9px;
+        color: white;
+        background-color: rgb(209 28 28);
+        font-size: 17px;
+        font-family: emoji;
+        font-weight: 600;
       }
       .next {
         height: 36px;
-    width: 90px;
+        width: 90px;
         border: none;
         border-radius: 12px;
         color: white;
@@ -39,13 +39,12 @@
       }
       .innerdiv {
         height: auto; /* Adjust height automatically */
-  width: 501px; /* Keep the width */
-  margin-top: 129px;
-  background-color: white;
-  padding: 20px;
-  border-radius: 22px;
-  position: relative;
-  
+        width: 501px; /* Keep the width */
+        margin-top: 129px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 22px;
+        position: relative;
       }
 
       .button-div {
@@ -72,65 +71,56 @@
         margin-top: 10px;
         margin-bottom: 8px;
         background-color: #dbe9f3;
-color: #2c3e50; 
+        color: #2c3e50;
 
         height: 30px;
         border-radius: 8px;
         padding-top: 1px;
       }
 
-      .optionsss :hover{
-        background-color: #7f8c8d; 
-color: #ffffff; 
-
+      .optionsss :hover {
+        background-color: #7f8c8d;
+        color: #ffffff;
       }
       #timer {
         font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-    width: 50px;
-    
-    color: #ffffff;
-    height: 29px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 20px;
+        width: 50px;
 
-
+        color: #ffffff;
+        height: 29px;
       }
 
+      #resultPieChart {
+        display: block;
+        margin: 20px auto;
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        box-sizing: border-box;
+        display: none;
+      }
 
-    #resultPieChart{
-    
-      display: block;
-  margin: 20px auto; 
-  width: 100%;
-  max-width: 300px;
-  height: auto; 
-  box-sizing: border-box;
-  display: none;
-    }  
-
-    .innerdiv canvas {
-  max-width: 100%;
-  height: auto;
-}
+      .innerdiv canvas {
+        max-width: 100%;
+        height: auto;
+      }
     </style>
   </head>
 
   <body>
     <div class="innerdiv" id="innerdiv"></div>
-    <canvas id="resultPieChart" class="resultPieChart" ></canvas>
+    <canvas id="resultPieChart" class="resultPieChart"></canvas>
     <div id="timer" class="timer">Timer</div>
-    
 
     <div class="button-div">
       <button class="prev" id="prev-button">prev</button>
       <button class="next" id="next-button">next</button>
     </div>
-   
-
 
     <script src="cricket.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   </body>
 </html>

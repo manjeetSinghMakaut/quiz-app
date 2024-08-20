@@ -175,6 +175,12 @@ function timer() {
 
     if (timeLeft <= 0) {
       clearInterval(intervalId);
+      if (currentQuestionIndex === quizfootball.length-1){
+        endQuiz();
+      }
+      else{
+        nextQuestion();
+      }
     }
   }, 1000);
 }
@@ -200,6 +206,75 @@ function calculatescore() {
   return score;
 }
 
+function nextQuestion(){
+  saveanswer();
+  if (currentQuestionIndex < quizfootball.length - 1) {
+    currentQuestionIndex++;
+    generatequiz(quizfootball, currentQuestionIndex);
+    // No need to call resetTimer and timer here because they are already called inside generatequiz
+  } else {
+    endQuiz();
+  }
+}
+
+
+function endQuiz(){
+  stopTimer();
+  let score = calculatescore();
+  const container = document.getElementById("innerdiv");
+  container.innerHTML = `<h2 style="color: black;align-items: center;display: flex;justify-content: center;">Quiz Completed</h2>
+        <p style="text-align: center; color: #216008;   font-size: larger; font-weight: 600;">Your Score: ${score} / ${quizfootball.length}</p>`;
+        const ctx = document.getElementById("resultPieChart").getContext("2d");
+
+        new Chart(ctx, {
+          type : "pie",
+          data : {
+            labels : ["correct" , "incorrect"],
+            datasets: [{
+              data : [score,quizfootball.length - score],
+
+              backgroundColor: [
+                "rgba(75, 192, 192, 0.2)", // Color for correct answers
+                "rgba(255, 99, 132, 0.2)", // Color for incorrect answers
+              ],
+              borderColor: [
+                "rgba(75, 192, 192, 1)", // Border color for correct answers
+                "rgba(255, 99, 132, 1)", // Border color for incorrect answers
+              ],
+              borderWidth: 1,
+
+            }, 
+          ],
+
+          },
+
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "top",
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (tooltipItem) {
+                    let label = tooltipItem.label || "";
+                    if (label) {
+                      label += ": " + tooltipItem.raw;
+                    }
+                    return label;
+                  },
+                },
+              },
+            },
+          },
+        });
+
+        document.getElementById("next-button").style.display = "none";
+        document.getElementById("timer").style.display = "none";
+      };
+
+
+
 window.onload = function () {
   generatequiz(quizfootball, currentQuestionIndex);
 
@@ -211,19 +286,19 @@ window.onload = function () {
     }
   });
 
+
+
+
   document.getElementById("next-button").addEventListener("click", function () {
     saveanswer();
     if (currentQuestionIndex < quizfootball.length - 1) {
       currentQuestionIndex++;
-      generatequiz(quizfootball, currentQuestionIndex);
-    } else if (currentQuestionIndex === quizfootball.length - 1) {
-      stopTimer();
-      const score = calculatescore();
-      const container = document.getElementById("innerdiv");
-      container.innerHTML = `<h2 style="color: black;align-items: center;display: flex;justify-content: center;">Quiz Completed</h2>
-            <p style="text-align: center; color: #216008;   font-size: larger; font-weight: 600;">Your Score: ${score} / ${quizfootball.length}</p>`;
-      document.getElementById("next-button").style.display = "none";
-      document.getElementById("timer").style.display = "none";
+      generatequiz(quizfootball,currentQuestionIndex);
+      resetTimer();
+      timer();
+    }
+    else{
+      endQuiz();
     }
   });
 };

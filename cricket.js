@@ -222,10 +222,12 @@ function nextQuestion() {
     generatequiz(quizQuestions, currentQuestionIndex);
     resetTimer();
     timer();
+    document.getElementById("prev-button").disabled = true;
   } else {
     endQuiz(); // Automatically call endQuiz() if it's the last question
   }
 }
+
 
 
 function endQuiz() {
@@ -301,6 +303,7 @@ window.onload = function () {
       generatequiz(quizQuestions, currentQuestionIndex);
       resetTimer();
       timer();
+      document.getElementById("prev-button").disabled = false;
     } else {
       endQuiz();
     }

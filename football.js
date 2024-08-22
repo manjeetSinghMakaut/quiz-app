@@ -211,10 +211,10 @@ function nextQuestion(){
   if (currentQuestionIndex < quizfootball.length - 1) {
     currentQuestionIndex++;
     generatequiz(quizfootball, currentQuestionIndex);
-    // No need to call resetTimer and timer here because they are already called inside generatequiz
   } else {
     endQuiz();
   }
+  document.getElementById("prev-button").disabled = true;
 }
 
 
@@ -296,6 +296,8 @@ window.onload = function () {
       generatequiz(quizfootball,currentQuestionIndex);
       resetTimer();
       timer();
+      document.getElementById("prev-button").disabled = false;
+
     }
     else{
       endQuiz();
